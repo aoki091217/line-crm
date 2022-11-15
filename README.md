@@ -1,51 +1,51 @@
-# リポジトリ名
+# 概要
 
-概要を記述する
-
-
-## デモ
-
-![デモ](https://image-url.gif)
+LINEを用いて顧客情報の管理を想定したシステムです。
 
 
-## 使い方
+## 開発環境
 
-DEMOの実行方法など、"Webアプリ"の基本的な使い方を説明
+* Laravel Framework 9.39.0
+* PHP 8.1.10
+* Windows 10
+* MySQL
 
-1. 使い方
-2. 使い方
-3. 使い方
 
+## 機能実装
 
-## 環境
+![進捗GIF](./storage/readme/progress.gif)
 
-* 要件
-* 要件
-* 要件
+### 実装済み機能
+
+* 友達追加のアクションをするとニックネームを聞く
+* ニックネームの入力に対する確認メッセージの応答をする
+* 「いいえ」を押すと、再度入力を促す応答をする
+* 「はい」を押すと、入力されたニックネームで会員登録を終了する
+
+### 実装予定機能
+
+#### LINE側
+
+* どうやって知ったかの選択肢応答メッセージ
+* リッチメニューコンテンツ
+
+#### 管理側
+
+* ログイン認証
+* 店舗、従業員、顧客情報の管理
+* 利用情報のグラフ化
 
 
 ## 注意事項
 
-注意点などがあれば書く
-
-
-## 文責
-
-作成情報を列挙する
-
-* 作成者
-* 所属
-* E-mail
-* [@twitter_username](https://twitter.com/twitter_username)
-
-
-## ライセンス
-
-ライセンスを明示する
-
-"リポジトリ名" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+1カ月前から着手しましたので、目標とする機能の実装には至っておりません。
+ご理解いただけますと幸いです。
 
 
 ## 参考文献
 
-参考にした情報源（サイト・論文）などの情報、リンク
+* ![LINE Developers 公式ドキュメント](https://developers.line.biz/ja/docs/messaging-api/)
+
+* ![LINEBotとLaravelの連携](https://biz.addisteria.com/laravel_line_message_api/)
+
+* ![応答メッセージ形式](https://tech.012grp.co.jp/entry/linebot-message-format)
