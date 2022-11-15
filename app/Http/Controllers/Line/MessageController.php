@@ -87,8 +87,6 @@ class MessageController extends Controller
                         }
                     case ($event instanceof UnfollowEvent):
                         $this->customer_service->deleteCustomer($line_id);
-                        $message = new TextMessageBuilder('ブロックされますと、解除された際に再度ご登録が必要になります。ご了承くださいませ。');
-                        $bot->replyMessage($reply_token, $message);
                         return;
                 }
             }
