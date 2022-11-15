@@ -3,6 +3,11 @@
 LaravelとLINEを用いて顧客情報の管理を計ることを想定したシステムです。
 
 
+## テーブル定義
+
+![LINE CRM スプレッドシート](https://docs.google.com/spreadsheets/d/1gR_mEkXzcfw867ERzBMxq2U8zyPAfomV/edit?usp=sharing&ouid=114694619383528347947&rtpof=true&sd=true)
+
+
 ## 開発環境
 
 * Laravel Framework 9.39.0
