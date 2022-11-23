@@ -8,27 +8,27 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerService
 {
-    public function findCustomer($line_id)
+    public function findCustomer($line_token)
     {
-        return Customer::withTrashed()->where('line_id', $line_id)->first();
+        return Customer::withTrashed()->where('line_token', $line_token)->first();
     }
 
-    public function deleteCustomer($line_id)
+    public function deleteCustomer($line_token)
     {
-        DB::transaction(function () use ($line_id) {
-            $customer = $this->findCustomer($line_id);
+        DB::transaction(function () use ($line_token) {
+            $customer = $this->findCustomer($line_token);
             if (!is_null($customer)) {
-                session()->forget($customer->line_id);
+                session()->forget($customer->line_token);
                 $customer->delete();
             }
         });
     }
 
-    public function setIsFollowed($line_id)
+    public function setIsFollowed($line_token)
     {
-        DB::transaction(function () use ($line_id) {
+        DB::transaction(function () use ($line_token) {
             Customer::create([
-                'line_id' => $line_id,
+                'line_token' => $line_token,
                 'is_followed' => 1
             ]);
         });
@@ -38,7 +38,7 @@ class CustomerService
     {
         DB::transaction(function () use ($event, $customer) {
             $customer->fill([
-                'nickname' => $event->getText(),
+                'name' => $event->getText(),
                 'is_confirm_send' => 1
             ])->save();
         });
@@ -48,7 +48,7 @@ class CustomerService
     {
         DB::transaction(function () use ($customer) {
             $customer->fill([
-                'nickname' => null,
+                'name' => null,
                 'is_confirm_send' => null
             ])->save();
         });
