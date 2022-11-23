@@ -43,15 +43,15 @@ class MessageController extends Controller
             $events = $bot->parseEventRequest($request_body, $signature);
 
             foreach ($events as $event) {
-                $line_id = $event->getUserId();
+                $line_token = $event->getUserId();
                 $reply_token = $event->getReplyToken();
 
                 switch ($event) {
                     case ($event instanceof FollowEvent):
-                        $customer = $this->customer_service->findCustomer($line_id);
+                        $customer = $this->customer_service->findCustomer($line_token);
 
                         if (is_null($customer)) {
-                            $this->customer_service->setIsFollowed($line_id);
+                            $this->customer_service->setIsFollowed($line_token);
                             $builder = new TextMessageBuilder('ニックネームが未登録です。ニックネームを入力してください。');
                             $bot->replyMessage($reply_token, $builder);
                         } elseif ($customer->trashed()) {
@@ -60,7 +60,7 @@ class MessageController extends Controller
 
                         return;
                     case ($event instanceof TextMessage):
-                        $customer = $this->customer_service->findCustomer($line_id);
+                        $customer = $this->customer_service->findCustomer($line_token);
 
                         if (!is_null($customer->is_followed) && is_null($customer->is_confirm_send)) {
                             $positive = new MessageTemplateActionBuilder('はい', 'はい');
@@ -76,8 +76,9 @@ class MessageController extends Controller
                         }
 
                         if ($event->getText() === 'はい') {
-                            $builder = new TextMessageBuilder("{$customer->nickname}様、ご登録ありがとうございます。");
+                            $builder = new TextMessageBuilder("{$customer->name}様、ご登録ありがとうございます。");
                             $bot->replyMessage($reply_token, $builder);
+
                             return;
                         } elseif ($event->getText() === 'いいえ') {
                             $this->customer_service->deleteNickname($customer);
@@ -86,7 +87,7 @@ class MessageController extends Controller
                             return;
                         }
                     case ($event instanceof UnfollowEvent):
-                        $this->customer_service->deleteCustomer($line_id);
+                        $this->customer_service->deleteCustomer($line_token);
                         return;
                 }
             }

@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->string('line_id');
-            $table->string('nickname')->nullable();
-            $table->tinyInteger('gender', false, true)->nullable();
-            $table->integer('age', false, true)->nullable();
-            $table->tinyInteger('type', false, true)->nullable();
+            $table->bigInteger('customer_id', true, true);
+            $table->string('line_token');
+            $table->string('name')->nullable();
+            $table->tinyInteger('sex', false, true)->nullable();
+            $table->integer('generation', false, true)->nullable();
+            $table->tinyInteger('reason', false, true)->nullable();
+            $table->date('customer_date')->nullable();
             $table->tinyInteger('is_followed', false, true)->nullable();
             $table->tinyInteger('is_confirm_send', false, true)->nullable();
-            $table->timestamps();
             $table->softDeletes();
         });
     }

@@ -11,15 +11,16 @@ class Customer extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $primaryKey = 'customer_id';
+
     protected $fillable = [
-        'line_id',
-        'nickname',
-        'gender',
-        'age',
-        'type',
+        'line_token',
+        'name',
+        'sex',
+        'generation',
+        'reason',
+        'customer_date',
         'is_followed',
-        'is_confirm_send',
-        'add_user',
-        'mod_user'
+        'is_confirm_send'
     ];
 }
